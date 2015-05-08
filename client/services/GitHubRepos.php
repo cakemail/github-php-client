@@ -173,7 +173,7 @@ class GitHubRepos extends GitHubService
 	/**
 	 * List repositories
 	 * 
-	 * @param $since string (Optional) - The integer ID of the last Repository that you’ve seen.
+	 * @param $since string (Optional) - The integer ID of the last Repository that you've seen.
 	 * 
 	 * @return array<GitHubSimpleRepo>
 	 */
@@ -298,6 +298,16 @@ class GitHubRepos extends GitHubService
 		$data = array();
 		
 		return $this->client->request("/repos/$owner/$repo", 'DELETE', $data, 204, '');
+	}
+
+	/**
+	 * Delete a Branch
+	 *
+	 */
+	public function deleteBranch($owner, $repo, $branch)
+	{
+		$data = array();
+		return $this->client->request("/repos/$owner/$repo/git/refs/heads/$branch", 'DELETE', $data, 204, '');
 	}
 	
 }
